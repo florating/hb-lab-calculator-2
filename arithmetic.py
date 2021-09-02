@@ -15,6 +15,8 @@ def multiply(num1, num2):
 
 def divide(num1, num2):
     """Divide the first input by the second and return the result."""
+    if num2 == 0:
+        return "You can't divide by zero!"
     return num1 / num2
 
 def square(num1):
@@ -31,4 +33,6 @@ def power(num1, num2):
 
 def mod(num1, num2):
     """Return the remainder of num1 / num2."""
+    if num2 == 0:
+        return "You can't divide by zero!"
     return num1 % num2

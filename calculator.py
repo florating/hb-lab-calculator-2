@@ -72,15 +72,18 @@ FUNCTIONS:
 """
 
 def main():
-    """ """
+    """Accepts user input in format of 'operator number number'
+    and performs calculation. Type q to quit.
+    """
     while True:
         print("What would you like to calculate? \
         \nEG: 'pow 3 5' will calculate 3 to the power of 5")
         # assumed to fit our format, might validate later
-        user_input = input("")          # 'pow 3 5'
-
+        user_input = input("> ")          # 'pow 3 5'
         tokens = tokenize(user_input)    # tokens = ['pow', 3, 5]
         if tokens[0] == 'q' or tokens[0] == 'quit':
-            # exit statement
+            print("Okay, goodbye!") # exit statement
             return  # exit the calculator
-        calculate(tokens)
+        print(calculate(tokens))
+
+main()
