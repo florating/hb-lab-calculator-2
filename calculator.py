@@ -3,21 +3,12 @@
 from arithmetic import (add, subtract, multiply, divide, square, cube,
                         power, mod, )
 
-"""
-Now, how should we evaluate our list of tokens (['pow', '3', '5'])?
-Take some time to think about this and jot down some preliminary pseudocode
-before you continue to the next paragraph.
-
-EXAMPLE:
-input_string = 'pow 3 5'
-tokens = input_string.split(' ')   # => ['pow', '3', '5']
-"""
-
 
 myops_1arg = {
     "square":square,
     "cube":cube
-    }
+}
+
 
 myops_2args = {
     "+":add,
@@ -41,6 +32,7 @@ def calculate(input_tokens):
         oplist = myops_2args
         operation = oplist[op]
         return operation(input_tokens[1], input_tokens[2])
+    return "This is not a valid expression."
     
 
 def tokenize(input_string):     # 'pow 3 5' vs 'square 3'
@@ -48,8 +40,11 @@ def tokenize(input_string):     # 'pow 3 5' vs 'square 3'
     tokens = input_string.split(' ')
     i = 1
     while i < len(tokens):
-        tokens[i] = int(tokens[i])  # validate?
-        i += 1
+        try:
+            tokens[i] = int(tokens[i])  # validate? using try-except
+            i += 1
+        except ValueError:
+            return 'error'
     return tokens
 
 """
@@ -81,9 +76,14 @@ def main():
         # assumed to fit our format, might validate later
         user_input = input("> ")          # 'pow 3 5'
         tokens = tokenize(user_input)    # tokens = ['pow', 3, 5]
-        if tokens[0] == 'q' or tokens[0] == 'quit':
+        if type(tokens) == str:
+            print("This expression is invalid. Try again.")
+            continue
+            # check if tokens is valid (integer check)
+        elif tokens[0] == 'q' or tokens[0] == 'quit':
             print("Okay, goodbye!") # exit statement
             return  # exit the calculator
-        print(calculate(tokens))
+        else:
+            print(calculate(tokens))
 
 main()
